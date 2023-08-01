@@ -31,6 +31,8 @@ public class Coordinate {
 
     private String dispositivo;
 
+    private String address;
+
     public Coordinate(Long idCoordinata, double latitude, double longitude, String name, String key, String topic, String dispositivo) {
         this.dispositivo = dispositivo;
         this.idCoordinata = idCoordinata;
@@ -121,6 +123,14 @@ public class Coordinate {
 
     public void setDispositivo(String dispositivo) {
         this.dispositivo = dispositivo;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     //    @Override
