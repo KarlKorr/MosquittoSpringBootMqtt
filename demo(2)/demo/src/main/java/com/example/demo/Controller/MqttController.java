@@ -72,14 +72,13 @@ public class MqttController {
 
 
     @PostMapping("/sendMessage")
-    public ResponseEntity<?> sendMessagetoTelegraf(@RequestParam("topic") String topic, String message) {
+    public ResponseEntity<?> sendMessagetoTelegraf(@RequestParam("topic") String topic, Coordinate message) {
 
-        Coordinate coordinate = new Gson().fromJson(message, Coordinate.class);
         System.out.println("In questo momento, le coordinate sono: " + message);
 
 
-//        mqttGateway.senToMqtt(message.toString(), topic);
-        mqttService.sendMessage(coordinate, topic);
+        mqttGateway.senToMqtt(message.toString(), topic);
+        mqttService.sendMessage(message, topic);
 
 
         return ResponseEntity.ok("Success");
