@@ -21,7 +21,7 @@ public class MqttService {
 
     public void sendMessage(Coordinate coordinata, String topic) {
         coordinata.setTopic(topic);
-        coordinata.setDataInvio(LocalDate.now().toString());
+        coordinata.setDataInvio(LocalDate.now().toString() + LocalTime.now().toString().substring(0, 7));
         coordinata.setOrarioInvio(LocalTime.now().toString());
         mqttRepository.save(coordinata);
     }
