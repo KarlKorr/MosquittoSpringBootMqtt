@@ -1,12 +1,13 @@
 package com.example.demo;
 
+import com.example.demo.MqttService.MqttService;
+import com.google.gson.Gson;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.core.MessageProducer;
-import org.springframework.integration.mqtt.config.xml.MqttMessageDrivenChannelAdapterParser;
 import org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory;
 import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
 import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
@@ -20,6 +21,12 @@ import org.springframework.messaging.MessagingException;
 
 @Configuration
 public class MqttBeans {
+
+    private final MqttService mqttService;
+
+    public MqttBeans(MqttService mqttService) {
+        this.mqttService = mqttService;
+    }
 
     // Si definiscono i canali di messaggistica mqttInputChannel() e mqttOutboundChannel()
 
@@ -76,6 +83,9 @@ public class MqttBeans {
                     System.out.println("Questo è il nostro topic");
                 }
                 System.out.println(message.getPayload());
+                Coordinate coordinate = new Gson().fromJson(message.toString(), Coordinate.class);
+                mqttService.sendMessage(coordinate, coordinate.getTopic());
+
             }
         };
     }
