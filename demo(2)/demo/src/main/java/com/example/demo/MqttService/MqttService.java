@@ -20,6 +20,7 @@ public class MqttService {
 
 
     public void sendMessage(Coordinate coordinata, String topic) {
+        System.out.println("Sono entrato in sendMessage");
         coordinata.setTopic(topic);
         coordinata.setDataInvio(LocalDate.now().toString() + " " + LocalTime.now().toString().substring(0, 8));
         coordinata.setOrarioInvio(LocalTime.now().toString());

@@ -83,7 +83,10 @@ public class MqttBeans {
                     System.out.println("Questo è il nostro topic");
                 }
                 System.out.println(message.getPayload());
+                System.out.println("Il messaggio ricevuto è uguale a: " + message);
+                System.out.println("Il messaggio stringato è uguale a: " + message.toString());
                 Coordinate coordinate = new Gson().fromJson(message.toString(), Coordinate.class);
+                System.out.println("Il messaggio deserializzato è uguale a: " + coordinate);
                 mqttService.sendMessage(coordinate, coordinate.getTopic());
 
             }
